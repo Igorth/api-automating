@@ -1,4 +1,4 @@
-from utils.request_handler import APIClient
+from utils.api_client import APIClient
 from config.config import BASE_URL
 
 # Initialize the API client with the base URL
