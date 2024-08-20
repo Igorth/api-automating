@@ -43,8 +43,15 @@ def test_update_post():
         print(f"PUT /posts/1 - Response JSON: {response.json()}")
 
 
+def test_delete_post():
+    response = client.delete("posts/1")
+    if response:
+        print(f"DELETE /posts/1 - Status Code: {response.status_code}")
+
+
 if __name__ == "__main__":
     test_get_all_posts()
     test_get_post_by_id()
     test_create_post()
     test_update_post()
+    test_delete_post()
