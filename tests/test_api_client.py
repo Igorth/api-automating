@@ -19,7 +19,7 @@ def test_get_all_posts(client):
 def test_get_post_by_id(client):
     """Test retrieving a post by ID"""
     response = client.get("posts/1")
-    assert response.status_code == 201
+    assert response.status_code == 200
     post = response.json()
     assert isinstance(post, dict)
     assert post["userId"] == 1
