@@ -16,6 +16,49 @@ class TestAPIClient(unittest.TestCase):
         self.assertIsInstance(response.json(), list)
         self.assertGreater(len(response.json()), 0)  # Ensure there are at least one post
 
+    def test_get_post_by_id(self):
+        """Test retrieving a post by ID"""
+        response = self.client.get("posts/1")
+        self.assertEqual(response.status_code, 200)
+        post = response.json()
+        self.assertIsInstance(post, dict)
+        self.assertEqual(post["userId"], 1)
+
+    def test_create_post(self):
+        """Test creating a new post"""
+        new_post = {
+            "userId": 1,
+            "title": "Test Post",
+            "body": "This is a test post"
+        }
+        response = self.client.post("posts", data=new_post)
+        self.assertEqual(response.status_code, 201)
+        created_post = response.json()
+        self.assertIsInstance(created_post, dict)
+        self.assertEqual(created_post["userId"], 1)
+        self.assertEqual(created_post["title"], "Test Post")
+        self.assertEqual(created_post["body"], "This is a test post")
+
+    def test_update_post(self):
+        """Test updating an existing post"""
+        updated_post = {
+            "userId": 1,
+            "id": 1,
+            "title": "Updated Test Post",
+            "body": "This is an updated test post"
+        }
+        response = self.client.put("posts/1", data=updated_post)
+        self.assertEqual(response.status_code, 200)
+        updated_data = response.json()
+        self.assertEqual(updated_data["title"], "Updated Test Post")
+        self.assertEqual(updated_data["body"], "This is an updated test post")
+
+    def test_delete_post(self):
+        """Test deleting a post"""
+        response = self.client.delete("posts/1")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.text, '{}')  # Expect an empty response body
+
 
 if __name__ == "__main__":
     unittest.main()
