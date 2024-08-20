@@ -31,7 +31,20 @@ def test_create_post():
         print(f"POST /posts - Response JSON: {response.json()}")
 
 
+def test_update_post():
+    updated_post = {
+        "userId": 1,
+        "title": "Updated Test Post",
+        "body": "This is an updated test post.",
+    }
+    response = client.put("posts/1", data=updated_post)
+    if response:
+        print(f"PUT /posts/1 - Status Code: {response.status_code}")
+        print(f"PUT /posts/1 - Response JSON: {response.json()}")
+
+
 if __name__ == "__main__":
     test_get_all_posts()
     test_get_post_by_id()
     test_create_post()
+    test_update_post()

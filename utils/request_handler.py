@@ -26,3 +26,14 @@ class APIClient:
             print(f"HTTP error occurred: {err}")
         except Exception as err:
             print(f"Other error occurred: {err}")
+
+    def put(self, endpoint, data=None):
+        """Send a PUT request to the API"""
+        try:
+            response = requests.put(f"{self.base_url}/{endpoint}", json=data)
+            response.raise_for_status()
+            return response
+        except requests.exceptions.HTTPError as err:
+            print(f"HTTP error occurred: {err}")
+        except Exception as err:
+            print(f"Other error occurred: {err}")
