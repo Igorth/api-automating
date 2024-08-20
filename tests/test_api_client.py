@@ -59,6 +59,43 @@ class TestAPIClient(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.text, '{}')  # Expect an empty response body
 
+    def test_invalid_endpoint(self):
+        """Test request to an invalid endpoint"""
+        response = self.client.get("invalid_endpoint")
+        self.assertEqual(response.status_code, 404)
+
+    def test_post_invalid_data(self):
+        """Test creating a new post with invalid data"""
+        invalid_post = {
+            "userId": 1,
+            "title": "Test Post",
+            "body": 123  # This should be a string
+        }
+        response = self.client.post("posts", data=invalid_post)
+        self.assertEqual(response.status_code, 201)
+        created_post = response.json()
+        self.assertIsInstance(created_post, dict)
+        # The API might accept the invalid data and, check if it returns something
+        self.assertIsNotNone(created_post["id"])
+
+    def test_put_invalid_data(self):
+        """Test updating an existing post with invalid data"""
+        invalid_post = {
+            "userId": 1,
+            "id": 1,
+            "title": "Updated Test Post",
+            "body": 123  # This should be a string
+        }
+        response = self.client.put("posts/1", data=invalid_post)
+        self.assertEqual(response.status_code, 200)
+        updated_data = response.json()
+        self.assertIsInstance(updated_data, dict)
+
+    def test_delete_invalid_id(self):
+        """Test deleting a post with an invalid ID"""
+        response = self.client.delete("posts/100000")
+        self.assertEqual(response.status_code, 200)  # JSONPlaceholder returns 200 even if the post doesn't exist
+
 
 if __name__ == "__main__":
     unittest.main()
