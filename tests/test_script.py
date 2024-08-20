@@ -19,6 +19,19 @@ def test_get_post_by_id():
         print(f"GET /posts/1 - Response JSON: {response.json()}")
 
 
+def test_create_post():
+    new_post = {
+        "userId": 1,
+        "title": "Test Post",
+        "body": "This is a test post."
+    }
+    response = client.post("posts", data=new_post)
+    if response:
+        print(f"POST /posts - Status Code: {response.status_code}")
+        print(f"POST /posts - Response JSON: {response.json()}")
+
+
 if __name__ == "__main__":
     test_get_all_posts()
     test_get_post_by_id()
+    test_create_post()
