@@ -15,3 +15,14 @@ class APIClient:
             print(f"HTTP error occurred: {err}")
         except Exception as err:
             print(f"Other error occurred: {err}")
+
+    def post(self, endpoint, data=None):
+        """Send a POST request to the API"""
+        try:
+            response = requests.post(f"{self.base_url}/{endpoint}", json=data)
+            response.raise_for_status()  # Raise and error for bad status code
+            return response
+        except requests.exceptions.HTTPError as err:
+            print(f"HTTP error occurred: {err}")
+        except Exception as err:
+            print(f"Other error occurred: {err}")
