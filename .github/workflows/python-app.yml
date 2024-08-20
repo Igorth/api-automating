@@ -23,7 +23,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest pytest-html
 
-      - name: Run tests
+      - name: Run tests and generate HTML report
         run: |
           python -m unittest discover tests/
+          pytest --html=reports/api_test_report.html --self-contained-html
+
+      - name: Upload HTML report to as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: API test report
+          path: reports/api_test_report.html
