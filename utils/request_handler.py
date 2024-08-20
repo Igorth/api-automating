@@ -1,8 +1,9 @@
 import requests
+from config.config import BASE_URL
 
 
 class APIClient:
-    def __init__(self, base_url):
+    def __init__(self, base_url=BASE_URL):
         self.base_url = base_url
 
     def get(self, endpoint, params=None):

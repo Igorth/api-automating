@@ -1,5 +1,6 @@
 import unittest
 from utils.request_handler import APIClient
+from config.config import BASE_URL
 
 
 class TestAPIClient(unittest.TestCase):
@@ -7,7 +8,7 @@ class TestAPIClient(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up the APIClient instance once for all tests"""
-        cls.client = APIClient(base_url="https://jsonplaceholder.typicode.com")
+        cls.client = APIClient(base_url=BASE_URL)
 
     def test_get_all_posts(self):
         """Test retrieving all posts"""

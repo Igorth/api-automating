@@ -1,7 +1,8 @@
 from utils.request_handler import APIClient
+from config.config import BASE_URL
 
 # Initialize the API client with the base URL
-client = APIClient(base_url="https://jsonplaceholder.typicode.com")
+client = APIClient(base_url=BASE_URL)
 
 
 # Test the GET request to retrieve all posts
