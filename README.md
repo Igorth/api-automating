@@ -1,4 +1,7 @@
 # API Testing Project
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![pytest](https://img.shields.io/badge/pytest-6.0+-yellow.svg)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-orange.svg)
 
 ## Overview
 This project demonstrates API testing using pytest and includes various test cases 
